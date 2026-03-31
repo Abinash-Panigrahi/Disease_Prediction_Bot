@@ -1,0 +1,19 @@
+# Virtual Environments :-
+.venv/
+env/
+
+# Streamlit Secrets :-
+# CRITICAL: Never upload your real API keys to GitHub!
+.streamlit/secrets.toml
+
+# Python Cache Files :-
+# These are temporary files Python makes automatically. 
+# They just waste space on GitHub.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS Generated Files :-
+.DS_Store
+Thumbs.db

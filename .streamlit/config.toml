@@ -1,0 +1,13 @@
+# The Global Theme Configuration file.
+# This file controls Streamlit's native styling variables, such as 
+# the primary brand color, background colors, and default font. 
+# It establishes the foundational healthcare UI theme before any 
+# custom CSS is applied.
+
+
+[theme]
+primaryColor = "#1e8449"
+backgroundColor = "#f4f9f6"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#1a2e3b"
+font = "sans serif"

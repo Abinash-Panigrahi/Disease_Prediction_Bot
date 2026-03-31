@@ -1,0 +1,84 @@
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+    .stApp { background-color: #f4f9f6; }
+
+    .main-header {
+        background: linear-gradient(135deg, #1a5276 0%, #1e8449 100%);
+        padding: 36px 30px;
+        border-radius: 18px;
+        text-align: center;
+        color: white;
+        margin-bottom: 32px;
+        box-shadow: 0 6px 24px rgba(26,82,118,0.18);
+    }
+    .main-header h1 { font-size: 2rem; font-weight: 700; margin: 0; }
+    .main-header p  { font-size: 1rem; margin: 8px 0 0 0; opacity: 0.88; }
+
+    .section-label { font-size: 1.05rem; font-weight: 600; color: #1a5276; margin-bottom: 4px; }
+    .section-sub   { font-size: 0.88rem; color: #5d7a8a; margin-bottom: 12px; }
+
+    .stTextArea textarea {
+        border: 2px solid #d0e8d8 !important;
+        border-radius: 12px !important;
+        font-size: 0.97rem !important;
+        background-color: #ffffff !important;
+        color: #1a2e3b !important;
+        caret-color: #1a2e3b !important;
+        padding: 14px !important;
+    }
+    .stTextArea textarea:focus {
+        border: 2px solid #1e8449 !important;
+        box-shadow: 0 0 0 3px rgba(30,132,73,0.12) !important;
+    }
+
+    .stButton > button {
+        background: linear-gradient(135deg, #1a5276, #1e8449) !important;
+        color: white !important;
+        border: none !important;
+        padding: 14px 30px !important;
+        border-radius: 50px !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        box-shadow: 0 4px 14px rgba(26,82,118,0.22);
+    }
+    .stButton > button:hover { transform: translateY(-2px) !important; }
+
+    hr { border: 1px solid #d0e8d8; margin: 28px 0; }
+
+    .report-title { font-size: 1.35rem; font-weight: 700; color: #1a5276; margin-bottom: 18px; text-align: center; }
+
+    .result-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin: 14px 0;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        border-left: 5px solid;
+    }
+    .disease-card     { border-left-color: #1a5276; }
+    .remedies-card    { border-left-color: #1e8449; }
+    .precautions-card { border-left-color: #2471a3; }
+
+    .card-heading { font-size: 1rem; font-weight: 700; margin: 0 0 12px 0; color: #1a5276; }
+    .card-body    { font-size: 0.94rem; color: #2c3e50; line-height: 1.6; }
+    .card-body ul { margin: 6px 0 0 0; padding-left: 20px; }
+    .card-body li { margin-bottom: 6px; }
+
+    .disclaimer {
+        background: #eaf6ff;
+        border: 1px solid #aed6f1;
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-top: 20px;
+        font-size: 0.83rem;
+        color: #1a5276;
+        line-height: 1.5;
+    }
+    .footer {
+        text-align: center;
+        color: #8da9b5;
+        font-size: 0.78rem;
+        margin-top: 44px;
+        padding-bottom: 20px;
+    }
