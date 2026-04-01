@@ -5,14 +5,33 @@
 
 ---
 
+## 🔗 Try It Live — Scan or Click
+
+<p align="center">
+  <img src="assets/clino_qr.png" alt="Clino Health QR Code" width="180"/>
+  <br/>
+  <b>📱 Scan to instantly launch the app on your phone</b>
+  <br/><br/>
+  <a href="https://clino-health-diseasepredictionbot.streamlit.app/">
+    🌐 clino-health-diseasepredictionbot.streamlit.app
+  </a>
+</p>
+
+---
+
 ## ✨ Features
 
-- 🤖 **AI-Powered Symptom Analysis** — Uses Google Gemini 2.5 Flash to interpret free-text symptoms and identify the most likely condition with a clear explanation
-- 🌿 **Home Remedies** — Returns 5 practical, condition-specific home remedies
-- ⚠️ **Precautions** — Provides targeted safety precautions for the predicted condition
-- 🎨 **Component-Based Custom UI** — HTML cards injected directly into Streamlit, styled via a dedicated `style.css` file for a clean, branded experience
-- 🔒 **Secure Secret Management** — API key handled through Streamlit's native `st.secrets`, mapped to `os.environ` — never hardcoded, never exposed
-- ⚡ **Reliable JSON Output** — Prompt enforces strict JSON structure so AI responses are always consistent and parseable
+- 🤖 **AI-Powered Diagnosis** — Gemini AI analyzes symptoms like an experienced physician
+- 💬 **Understands Everyday Language** — Type "tummy hurts" or "pee burns" — Dr. Clino gets it
+- 🚨 **Emergency Detection** — Instantly flags life-threatening symptoms with a red alert banner
+- 📊 **Severity Grading** — Mild / Moderate / Severe with dynamic color-coded indicators
+- 🌿 **Home Remedies** — 5 safe, practical, condition-specific remedies explained simply
+- ⚠️ **Smart Precautions** — Clear ✅ DO's and ❌ DON'Ts specific to your condition
+- 🏥 **When to See a Doctor** — Exact warning signs in plain everyday language
+- 💡 **Fun Health Fact** — One interesting fact per diagnosis
+- ⚕️ **AI-Powered Disclaimer** — Dynamic, human-friendly medical disclaimer
+- 🔒 **Secure Secret Management** — API key via Streamlit secrets, never hardcoded
+- ⚡ **Reliable JSON Output** — XML-structured prompt enforces consistent AI responses
 
 ---
 
@@ -37,7 +56,7 @@ Disease_Prediction_Bot/
 │
 ├── app.py                         # Streamlit UI — input, HTML card injection, error handling
 ├── api.py                         # Gemini API — configure client, call model, parse response
-├── prompt.py                      # Prompt template — enforces strict JSON output
+├── prompt.py                      # XML-structured prompt — layman detection, dual-format medical responses
 ├── style.css                      # All custom CSS — separated from Python logic
 │
 ├── requirements.txt               # Project dependencies
@@ -47,6 +66,8 @@ Disease_Prediction_Bot/
     ├── config.toml                # Streamlit theme settings (Blue / White / Green)
     ├── secrets.toml               # ⚠️  Your real API key — NEVER commit this
     └── secrets.toml.example       # ✅  Safe placeholder — committed to GitHub
+└── assets/
+    └── clino_qr.png               # QR code for live app access (For the event)
 ```
 
 ---
@@ -59,9 +80,9 @@ Each file has a **single responsibility**. Here is how they connect:
 app.py  ──imports──▶  api.py  ──imports──▶  prompt.py
   │                      │                      │
   │                      │                      │
-  UI & error display    Gemini API call     Prompt builder
-  st.error()            raise ValueError()  build_prompt()
-  st.spinner()          json.loads()
+  UI & error display    Gemini API call     XML-tagged prompt engine
+  st.error()            raise ValueError()  layman detection + dual-format
+  st.spinner()          json.loads()        build_prompt()
   HTML card injection   os.environ bridge
 ```
 
@@ -142,7 +163,7 @@ The app will open at `http://localhost:8501` 🎉
     GEMINI_API_KEY = "your_real_gemini_api_key_here"
     ```
 5. Click **Deploy** — Streamlit gives you a live public URL in minutes 🌐
-6. Generate a QR code from that URL at [qr-code-generator.com](https://www.qr-code-generator.com) — ready for your event booth 🇸🇬
+6. An `assets/` folder with `clino_qr.png` is already in the repo — scan it directly above from this README file 
 
 ---
 
