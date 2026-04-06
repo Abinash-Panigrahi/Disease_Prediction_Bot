@@ -1,124 +1,131 @@
-# Clino Health — AI Disease Prediction System
+# 🏥 Clino Health Innovation
+### AI-Powered Symptom Checker & Disease Predictor
 
-**Clino Health Innovation** | Internal Repository | Confidential
-
----
-
-## Overview
-
-Clino Health is an AI-powered healthcare assistant designed to analyze patient-described symptoms and return a structured medical report in real time. The system leverages Google Gemini AI to deliver condition predictions, severity grading, home remedies, and precautionary guidance — all through a clean, accessible web interface.
+> A production-grade healthcare assistant that analyzes user-described symptoms using Google Gemini AI and returns a structured medical report — including a predicted condition, home remedies, and precautions. Built for live event demonstration and real-world deployment.
 
 ---
 
-## Live Application
+## 🔗 Try It Live — Scan or Click
 
-| | |
+<p align="center">
+  <img src="assets/clino_qr.png" alt="Clino Health QR Code" width="180"/>
+  <br/>
+  <b>📱 Scan to instantly launch the app on your phone</b>
+  <br/><br/>
+  <a href="https://clino-health-diseasepredictionbot.streamlit.app/">
+    🌐 clino-health-diseasepredictionbot.streamlit.app
+  </a>
+</p>
+
+---
+
+## ✨ Features
+
+- 🤖 **AI-Powered Diagnosis** — Gemini AI analyzes symptoms like an experienced physician
+- 💬 **Understands Everyday Language** — Type "tummy hurts" or "pee burns" — Dr. Clino gets it
+- 🚨 **Emergency Detection** — Instantly flags life-threatening symptoms with a red alert banner
+- 📊 **Severity Grading** — Mild / Moderate / Severe with dynamic color-coded indicators
+- 🌿 **Home Remedies** — 5 safe, practical, condition-specific remedies explained simply
+- ⚠️ **Smart Precautions** — Clear ✅ DO's and ❌ DON'Ts specific to your condition
+- 🏥 **When to See a Doctor** — Exact warning signs in plain everyday language
+- 💡 **Fun Health Fact** — One interesting fact per diagnosis
+- ⚕️ **AI-Powered Disclaimer** — Dynamic, human-friendly medical disclaimer
+- 🔒 **Secure Secret Management** — API key via Streamlit secrets, never hardcoded
+- ⚡ **Reliable JSON Output** — XML-structured prompt enforces consistent AI responses
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tool |
 |---|---|
-| **Production URL** | `https://company-domain.com` *(update after deployment)* |
-| **Event QR Code** | Located in `assets/clino_qr.png` *(regenerate after deployment)* |
+| **Frontend & Server** | Streamlit |
+| **AI Model** | Google `gemini-2.5-flash` |
+| **AI SDK** | `google-genai` (new modern SDK) |
+| **Language** | Python 3.10+ |
+| **Styling** | Custom CSS (`style.css`) |
+| **Secret Management** | Streamlit `st.secrets` → `os.environ` |
+| **Deployment** | Streamlit Community Cloud |
 
 ---
 
-## Key Features
-
-- **AI-Powered Diagnosis** — Gemini AI analyzes symptoms with clinical accuracy
-- **Natural Language Input** — Accepts both medical terminology and everyday language
-- **Emergency Detection** — Instantly flags life-threatening symptoms with a high-priority alert
-- **Severity Grading** — Classifies conditions as Mild / Moderate / Severe with visual indicators
-- **Home Remedies** — Five safe, condition-specific remedies per diagnosis
-- **Smart Precautions** — Clear DO's and DON'Ts tailored to the predicted condition
-- **Doctor Referral Guidance** — Specific warning signs that indicate when to seek professional care
-- **Secure API Management** — API key handled via environment secrets, never hardcoded
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend & Server | Streamlit |
-| AI Model | gemini-2.5-flash |
-| AI SDK | `google-genai` |
-| Language | Python 3.10+ |
-| Styling | Custom CSS |
-| Secret Management | Environment-based secrets |
-| Deployment | Company Production Server |
-
----
-
-## Project Structure
+## 📁 Folder Structure
 
 ```
 Disease_Prediction_Bot/
 │
-├── app.py                        # Streamlit UI — input, HTML rendering, error handling
-├── api.py                        # Gemini API — client configuration, model call, response parsing
-├── prompt.py                     # Prompt engine — XML-structured, dual-format medical responses
-├── style.css                     # All custom CSS — separated from application logic
+├── app.py                         # Streamlit UI — input, HTML card injection, error handling
+├── api.py                         # Gemini API — configure client, call model, parse response
+├── prompt.py                      # XML-structured prompt — layman detection, dual-format medical responses
+├── style.css                      # All custom CSS — separated from Python logic
 │
-├── requirements.txt              # Project dependencies
-├── .gitignore                    # Excludes .venv, secrets.toml, __pycache__
+├── requirements.txt               # Project dependencies
+├── .gitignore                     # Ignores .venv, real secrets.toml, __pycache__
 │
 └── .streamlit/
-    ├── config.toml               # Streamlit theme configuration
-    ├── secrets.toml              # ⚠️ Real API key — never commit this file
-    └── secrets.toml.example      # ✅ Safe placeholder — committed to repository
-│
+    ├── config.toml                # Streamlit theme settings (Blue / White / Green)
+    ├── secrets.toml               # ⚠️  Your real API key — NEVER commit this
+    └── secrets.toml.example       # ✅  Safe placeholder — committed to GitHub
 └── assets/
-    └── clino_qr.png              # QR code for event-based app access
+    └── clino_qr.png               # QR code for live app access (For the event)
 ```
 
 ---
 
-## Architecture
+## 🔗 Architecture
 
-Each module follows a single-responsibility principle:
+Each file has a **single responsibility**. Here is how they connect:
 
 ```
 app.py  ──imports──▶  api.py  ──imports──▶  prompt.py
-   │                     │                      │
-   │                     │                      │
-UI & error display    Gemini API call       XML prompt engine
-st.error()            raise ValueError()    build_prompt()
-st.spinner()          json.loads()          layman + medical format
-HTML card injection   os.environ bridge
+  │                      │                      │
+  │                      │                      │
+  UI & error display    Gemini API call     XML-tagged prompt engine
+  st.error()            raise ValueError()  layman detection + dual-format
+  st.spinner()          json.loads()        build_prompt()
+  HTML card injection   os.environ bridge
 ```
+
+**Key design rules followed:**
+- `app.py` is the only file that uses Streamlit — all `st.*` calls live here
+- `api.py` raises plain Python exceptions — never touches Streamlit
+- `style.css` holds all CSS — `app.py` injects HTML cards dynamically with AI results
 
 ---
 
-## Local Development Setup
+## ⚙️ Local Setup
 
-### 1. Clone the Repository
+### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://gitlab.com/your-company/healthcare-bot.git
-cd healthcare-bot
+git clone https://github.com/YOUR_USERNAME/clino_health.git
+cd clino_health
 ```
 
-### 2. Create & Activate Virtual Environment
+### 2️⃣ Create & Activate Virtual Environment
 
 ```bash
+# Create virtual environment
 python -m venv .venv
 ```
 
 ```bash
-# Mac / Linux
+# Activate — Mac / Linux
 source .venv/bin/activate
 
-# Windows (Command Prompt)
+# Activate — Windows
 .venv\Scripts\activate
-
-# Windows (PowerShell)
-.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install Dependencies
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure API Key
+### 4️⃣ Set Up Your API Key
+
+Copy the example secrets file:
 
 ```bash
 # Mac / Linux
@@ -128,46 +135,80 @@ cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 copy .streamlit\secrets.toml.example .streamlit\secrets.toml
 ```
 
-Open `.streamlit/secrets.toml` then add your key:
+Open `.streamlit/secrets.toml` and paste your real key:
 
 ```toml
-GEMINI_API_KEY = "your_gemini_api_key_here"
+GEMINI_API_KEY = "your_real_gemini_api_key_here"
 ```
 
-> Obtain a Gemini API key from [aistudio.google.com](https://aistudio.google.com)
+> 🔑 Get your free Gemini API key at [aistudio.google.com](https://aistudio.google.com) → **Get API Key**
 
-### 5. Run Locally
+### 5️⃣ Run the App
 
 ```bash
 streamlit run app.py
 ```
 
-Application will be available at `http://localhost:8501`
+The app will open at `http://localhost:8501` 🎉
 
 ---
 
-## Security
+## ☁️ Streamlit Cloud Deployment
 
-| Concern | Approach |
+1. **Push your repo to GitHub** — confirm `.streamlit/secrets.toml` is listed in `.gitignore` before pushing
+2. Go to **[share.streamlit.io](https://share.streamlit.io)** → Sign in → click **New App**
+3. Connect your GitHub repository and set **Main file path** to `app.py`
+4. Open **Settings → Secrets** and add:
+    ```toml
+    GEMINI_API_KEY = "your_real_gemini_api_key_here"
+    ```
+5. Click **Deploy** — Streamlit gives you a live public URL in minutes 🌐
+6. An `assets/` folder with `clino_qr.png` is already in the repo — scan it directly above from this README file 
+
+---
+
+## 🔐 Security Design
+
+| What | How |
 |---|---|
-| API key — local | Stored in `.streamlit/secrets.toml` (git-ignored) |
-| Code access | `st.secrets` → mapped to `os.environ` |
-| Safe to commit | `secrets.toml.example` (no real values) |
-| Never commit | `secrets.toml`, `.venv/`, `__pycache__/` |
+| API key storage locally | `.streamlit/secrets.toml` (git-ignored) |
+| API key storage on cloud | Streamlit Cloud Secrets dashboard |
+| How code accesses it | `st.secrets` → mapped to `os.environ` |
+| What is safe to commit | `secrets.toml.example` (no real values) |
+| What is never committed | `secrets.toml`, `.venv/`, `__pycache__/` |
 
 ---
 
-## Dependencies
+## 📦 Dependencies
 
 ```
 streamlit
 google-genai
 ```
 
+Install with:
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-*© 2026 Clino Health Innovation.*
+## 👨‍💻 Developer
+
+**Abinash Panigrahi**
+Developed for **Clino Health Innovation**
+Demonstrated live at a technology & investment event
+
+---
+
+## ⚕️ Medical Disclaimer
+
+> This application is powered by artificial intelligence and is intended **strictly for informational and demonstration purposes only.**
+> It is **not** a substitute for professional medical advice, diagnosis, or treatment.
+> Always consult a qualified and licensed healthcare provider for any medical concerns.
+> Never disregard or delay seeking professional medical advice based on information provided by this tool.
+> **In a medical emergency, contact your local emergency services immediately.**
+
+---
+
+_© 2026 Clino Health Innovation. All rights reserved._
