@@ -138,20 +138,34 @@ Every field must follow the dual language format and tone rules above.
         "Remedy Name (what it is in simple words) — How to use it, how often, and WHY it helps."
     ],
 
-    "precautions": [
-        "✅ DO: Specific action to take — written simply with a brief reason why.",
-        "✅ DO: Specific action to take — written simply with a brief reason why.",
-        "❌ AVOID: Specific thing to avoid — written simply with a brief reason why.",
-        "❌ AVOID: Specific thing to avoid — written simply with a brief reason why."
+    "precautions": [ 
+        "✅ : Specific action to take — written simply with a brief reason why.",
+        "✅ : Specific action to take — written simply with a brief reason why.",
+        "❌ : Specific thing to avoid — written simply with a brief reason why.",
+        "❌ : Specific thing to avoid — written simply with a brief reason why."
     ],
 
     "when_to_see_doctor": "Write like a caring friend warning you. Describe EXACT warning signs in simple words that mean things are getting worse. Example: If your fever goes above 103°F, you have trouble breathing, or symptoms do not improve in 3 days — please visit a doctor immediately.",
 
-    "fun_health_fact": "One short, interesting, and relevant health fact about this condition — written in a friendly and engaging way with an emoji.",
-
-    "disclaimer": "⚕️ Dr. Clino is an AI assistant providing general health information only. This is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified doctor for your health decisions. Stay safe! 💙"
+    "health_fact": "One short, interesting, and relevant health fact about this condition — written in a friendly and engaging way with an emoji.",
 }}
 </instructions>
 """
 
     return prompt
+
+def build_validation_prompt(user_input: str) -> str:
+    return f"""
+    Analyze this user input and determine if it contains valid health symptoms or medical complaints.
+    
+    User input: "{user_input}"
+    
+    Rules:
+    - Must be related to human health, body, pain, discomfort, or medical condition
+    - Must be real language (not gibberish, random characters, or keyboard spam)
+    - Must have meaningful content (not just numbers, symbols, or random letters)
+    - Can be in any language or informal/slang terms
+
+    Respond ONLY in this exact JSON format, nothing else:
+    {{"is_valid": true or false, "reason": "one short sentence"}}
+    """

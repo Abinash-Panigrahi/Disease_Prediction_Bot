@@ -12,7 +12,7 @@ import json
 import os
 from google import genai
 from google.genai import types
-from prompt import build_prompt
+from prompt import build_prompt,build_validation_prompt
 
 def configure_gemini():
     """
@@ -27,6 +27,18 @@ def configure_gemini():
     # We set it as an environment variable here so the new GenAI client finds it automatically
     os.environ["GEMINI_API_KEY"] = api_key
 
+def validate_symptoms(user_input: str) -> tuple[bool, str]:
+    client = genai.Client()
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=build_validation_prompt(user_input),
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+            temperature=0.1
+        )
+    )
+    result = json.loads(response.text.strip())
+    return result["is_valid"], result["reason"]
 
 def analyze_symptoms(symptoms: str) -> dict:
     """

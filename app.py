@@ -9,7 +9,7 @@ AI-generated medical report.
 
 import streamlit as st
 import json
-from api import configure_gemini, analyze_symptoms
+from api import configure_gemini, analyze_symptoms ,validate_symptoms
 
 # ─── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -59,16 +59,17 @@ if predict_btn:
     if not symptoms.strip():
         st.warning("⚠️ Please describe your symptoms before clicking Predict.")
     else:
-        with st.spinner("🤖 Analyzing your symptoms with Gemini AI..."):
-            try:
-                result = analyze_symptoms(symptoms)
+        with st.spinner("🔎 Validating your input..."):
+            is_valid, reason = validate_symptoms(symptoms)
 
-                # 🛑 THE NEW GUARDRAIL: Intercept Invalid Input
-                if "Invalid Input" in result.get('predicted_disease', ''):
-                    st.warning(f"⚠️ {result.get('predicted_disease', '')}")
-                
+        if not is_valid:
+            st.error(f"⚠️ Invalid input: {reason}. Please describe your symptoms clearly.")
+        else:
+            with st.spinner("🤖 Analyzing your symptoms ..."):
+                try:
+                    result = analyze_symptoms(symptoms)
+                                    
                 # ✅ If the input IS valid, draw the full health report
-                else:
                     st.markdown("<hr>", unsafe_allow_html=True)
                     st.markdown('<p class="report-title">🩺 Your Health Report</p>', unsafe_allow_html=True)
 
@@ -106,7 +107,7 @@ if predict_btn:
                     precautions_li = "".join([f"<li>{p}</li>" for p in result.get('precautions', [])])
                     st.markdown(f"""
                     <div class="result-card precautions-card">
-                        <p class="card-heading">⚠️ &nbsp;Precautions</p>
+                        <p class="card-heading">⚠️ &nbsp;Precautions <br>   DO✅   AVOID❌</p>
                         <div class="card-body"><ul>{precautions_li}</ul></div>
                     </div>
                     """, unsafe_allow_html=True)
@@ -120,19 +121,12 @@ if predict_btn:
                     """, unsafe_allow_html=True)
 
                     # 💡 6. Fun Health Fact
-                    st.info(f"**💡 Fun Fact:** {result.get('fun_health_fact', '')}")
+                    st.info(f"**💡Health Fact:** {result.get('health_fact', '')}")
 
-                    # ⚕️ 7. Dynamic AI Disclaimer
-                    st.markdown(f"""
-                    <div class="disclaimer">
-                        {result.get('disclaimer', '')}
-                    </div>
-                    """, unsafe_allow_html=True)
-
-            except json.JSONDecodeError:
-                st.error("⚠️ Could not read the AI response. Please try again.")
-            except Exception as e:
-                st.error(f"❌ Something went wrong: {str(e)}")
+                except json.JSONDecodeError:
+                    st.error("⚠️ Could not read the AI response. Please try again.")
+                except Exception as e:
+                    st.error(f"❌ Something went wrong: {str(e)}")
 
 # ─── Footer ────────────────────────────────────────────────────────────────────
 st.markdown("""
