@@ -137,6 +137,6 @@ if predict_btn:
 # ─── Footer ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="footer">
-    © 2026 Clino Health Innovation &nbsp;|&nbsp; Powered by Gemini AI &nbsp;|&nbsp; For demonstration purposes only
+    © 2026 Clino Health Innovation
 </div>
 """, unsafe_allow_html=True)
